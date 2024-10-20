@@ -1,0 +1,12 @@
+E:\Lab05\Lab05.DAL\bin\Debug\Lab05.DAL.dll.config
+E:\Lab05\Lab05.DAL\bin\Debug\Lab05.DAL.dll
+E:\Lab05\Lab05.DAL\bin\Debug\Lab05.DAL.pdb
+E:\Lab05\Lab05.DAL\bin\Debug\EntityFramework.dll
+E:\Lab05\Lab05.DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Lab05\Lab05.DAL\bin\Debug\EntityFramework.xml
+E:\Lab05\Lab05.DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Lab05\Lab05.DAL\obj\Debug\Lab05.DAL.csproj.AssemblyReference.cache
+E:\Lab05\Lab05.DAL\obj\Debug\Lab05.DAL.csproj.CoreCompileInputs.cache
+E:\Lab05\Lab05.DAL\obj\Debug\Lab05.DAL.csproj.Up2Date
+E:\Lab05\Lab05.DAL\obj\Debug\Lab05.DAL.dll
+E:\Lab05\Lab05.DAL\obj\Debug\Lab05.DAL.pdb
