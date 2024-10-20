@@ -16,7 +16,7 @@ namespace Lab05
 {
     public partial class Form1 : Form
     {
-        private string folderPath;
+        private string folderPath; //đường dẫn của tệp Images
         private readonly StudentService studentService = new StudentService();
         private readonly FacultyService facultyService = new FacultyService();
         private QuanLySinhVienDB context = new QuanLySinhVienDB();
@@ -25,6 +25,7 @@ namespace Lab05
             InitializeComponent();
             // khởi tạo sự kiện mỗi khi chọn vào một dòng trên datagridview
             this.dgvStudent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(dgvStudent_CellContentClick);
+            this.menuDK.Click += new EventHandler(btnRegisterMajor_Click);
         }
         private void FillFalcultyCombobox(List<Faculty> listFacultys)
         {
@@ -71,12 +72,13 @@ namespace Lab05
                 ShowAvatar(item.Avatar);
             }
         }
+
+        // làm đẹp cho datagridview
         public void setGridViewStyle(DataGridView dgview)
         {
             dgview.BorderStyle = BorderStyle.None;
             dgview.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            dgview.CellBorderStyle =
-            DataGridViewCellBorderStyle.SingleHorizontal;
+            dgview.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgview.BackgroundColor = Color.White;
             dgview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
@@ -162,8 +164,13 @@ namespace Lab05
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            Student sDelete = context.Students.FirstOrDefault(s => s.StudentID == txtStudentID.Text);
-            studentService.DeleteStudent(sDelete);
+            DialogResult dlg = MessageBox.Show("Xoá thông tin thành công!", "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(dlg == DialogResult.Yes) 
+            { 
+                Student sDelete = context.Students.FirstOrDefault(s => s.StudentID == txtStudentID.Text);
+                studentService.DeleteStudent(sDelete);
+                MessageBox.Show("Xoá thông tin thành công!", "Thông Báo", MessageBoxButtons.OK);
+            }
         }
 
         private void dgvStudent_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -194,8 +201,19 @@ namespace Lab05
 
         private void btnRegisterMajor_Click(object sender, EventArgs e)
         {
+            this.Hide();
             register reg = new register();
-            reg.ShowDialog();
+            reg.ShowDialog();           
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void menuDK_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

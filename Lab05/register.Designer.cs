@@ -31,16 +31,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.dgvFaculty = new System.Windows.Forms.DataGridView();
-            this.btnRegister = new System.Windows.Forms.Button();
-            this.cmbFaculty = new System.Windows.Forms.ComboBox();
-            this.cmbMajor = new System.Windows.Forms.ComboBox();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.dgvStudent = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFaculty)).BeginInit();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.cmbFaculty = new System.Windows.Forms.ComboBox();
+            this.cmbMajor = new System.Windows.Forms.ComboBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudent)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -73,53 +73,19 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "Chuyên ngành";
             // 
-            // dgvFaculty
+            // dgvStudent
             // 
-            this.dgvFaculty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFaculty.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStudent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dgvFaculty.Location = new System.Drawing.Point(12, 140);
-            this.dgvFaculty.Name = "dgvFaculty";
-            this.dgvFaculty.Size = new System.Drawing.Size(786, 339);
-            this.dgvFaculty.TabIndex = 2;
-            // 
-            // btnRegister
-            // 
-            this.btnRegister.Location = new System.Drawing.Point(12, 485);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(106, 23);
-            this.btnRegister.TabIndex = 3;
-            this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            // 
-            // cmbFaculty
-            // 
-            this.cmbFaculty.FormattingEnabled = true;
-            this.cmbFaculty.Location = new System.Drawing.Point(269, 68);
-            this.cmbFaculty.Name = "cmbFaculty";
-            this.cmbFaculty.Size = new System.Drawing.Size(226, 21);
-            this.cmbFaculty.TabIndex = 4;
-            // 
-            // cmbMajor
-            // 
-            this.cmbMajor.FormattingEnabled = true;
-            this.cmbMajor.Location = new System.Drawing.Point(269, 107);
-            this.cmbMajor.Name = "cmbMajor";
-            this.cmbMajor.Size = new System.Drawing.Size(226, 21);
-            this.cmbMajor.TabIndex = 4;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(693, 485);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(105, 23);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Đóng";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.dgvStudent.Location = new System.Drawing.Point(12, 140);
+            this.dgvStudent.Name = "dgvStudent";
+            this.dgvStudent.Size = new System.Drawing.Size(786, 339);
+            this.dgvStudent.TabIndex = 2;
+            this.dgvStudent.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStudent_CellContentClick);
             // 
             // Column1
             // 
@@ -145,6 +111,43 @@
             this.Column4.HeaderText = "Điểm TB";
             this.Column4.Name = "Column4";
             // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(12, 485);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(106, 23);
+            this.btnRegister.TabIndex = 3;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // cmbFaculty
+            // 
+            this.cmbFaculty.FormattingEnabled = true;
+            this.cmbFaculty.Location = new System.Drawing.Point(269, 68);
+            this.cmbFaculty.Name = "cmbFaculty";
+            this.cmbFaculty.Size = new System.Drawing.Size(226, 21);
+            this.cmbFaculty.TabIndex = 4;
+            this.cmbFaculty.SelectedIndexChanged += new System.EventHandler(this.cmbFaculty_SelectedIndexChanged);
+            // 
+            // cmbMajor
+            // 
+            this.cmbMajor.FormattingEnabled = true;
+            this.cmbMajor.Location = new System.Drawing.Point(269, 107);
+            this.cmbMajor.Name = "cmbMajor";
+            this.cmbMajor.Size = new System.Drawing.Size(226, 21);
+            this.cmbMajor.TabIndex = 4;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(693, 485);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(105, 23);
+            this.btnClose.TabIndex = 5;
+            this.btnClose.Text = "Đóng";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,14 +157,14 @@
             this.Controls.Add(this.cmbMajor);
             this.Controls.Add(this.cmbFaculty);
             this.Controls.Add(this.btnRegister);
-            this.Controls.Add(this.dgvFaculty);
+            this.Controls.Add(this.dgvStudent);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "register";
             this.Text = "Đăng ký chuyên ngành";
             this.Load += new System.EventHandler(this.register_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFaculty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,7 +175,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dgvFaculty;
+        private System.Windows.Forms.DataGridView dgvStudent;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.ComboBox cmbFaculty;
         private System.Windows.Forms.ComboBox cmbMajor;
