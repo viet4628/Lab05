@@ -100,23 +100,26 @@ namespace Lab05
             }
             else
             {
-                string parentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
-                string imagePath = Path.Combine(parentDirectory, "Images", ImageName);
-                pictureBox.Image = Image.FromFile(imagePath);
+                // Kết hợp đường dẫn tương đối với thư mục gốc
+                string imagePath = Path.Combine(Application.StartupPath, ImageName);
+                if (File.Exists(imagePath))
+                {
+                    pictureBox.Image = Image.FromFile(imagePath);
+                }
+                else
+                {
+                    MessageBox.Show("Hình ảnh không tồn tại!");
+                }
                 pictureBox.Refresh();
             }
         }
+
         private void btnMore_Click(object sender, EventArgs e)
         {
-            // Đường dẫn tương đối đến thư mục "Images" trong solution
-            folderPath = Path.Combine(Application.StartupPath, @"..\..\Images");
-            if (!Directory.Exists(folderPath))
+            OpenFileDialog open = new OpenFileDialog
             {
-                MessageBox.Show("Thư mục ảnh không tồn tại!");
-            }
-            OpenFileDialog open = new OpenFileDialog();
-            open.InitialDirectory = folderPath;
-            open.Filter = "Image File | *.jpg; *.png; *.gif; *.jpeg";
+                Filter = "Image File | *.jpg; *.png; *.gif; *.jpeg"
+            };
 
             if (open.ShowDialog() == DialogResult.OK)
             {
@@ -124,13 +127,40 @@ namespace Lab05
             }
         }
 
+        // Hàm lấy đường dẫn tương đối từ đường dẫn tuyệt đối
+        private string GetRelativePath(string fullPath)
+        {
+            // Lấy đường dẫn thư mục gốc của project
+            string projectPath = Application.StartupPath; 
+
+            // Tạo đường dẫn tương đối bằng cách loại bỏ đường dẫn gốc khỏi fullPath
+            Uri fullUri = new Uri(fullPath);
+            Uri projectUri = new Uri(projectPath + "\\");
+            string relativePath = Uri.UnescapeDataString(projectUri.MakeRelativeUri(fullUri).ToString());
+
+            return relativePath.Replace('/', '\\');
+        }
         private void btnAdd_Update_Click(object sender, EventArgs e)
         {
             Student s = studentService.FindByID(txtStudentID.Text);
 
+            // Lấy đường dẫn ảnh từ PictureBox
+            string fullImagePath = pictureBox.ImageLocation;
+            string relativeImagePath = string.Empty;
+
+            // Chuyển đổi đường dẫn tuyệt đối thành đường dẫn tương đối nếu có ảnh
+            if (!string.IsNullOrEmpty(fullImagePath) && File.Exists(fullImagePath))
+            {
+                relativeImagePath = GetRelativePath(fullImagePath);
+            }
+            else
+            {
+                relativeImagePath = null; 
+            }
+
             if (s == null)
             {
-                // Thêm mới sinh viên
+                // Thêm mới 
                 s = new Student
                 {
                     StudentID = txtStudentID.Text,
@@ -138,23 +168,23 @@ namespace Lab05
                     FacultyID = int.Parse(cmbFaculty.SelectedValue.ToString()),
                     AverageScore = float.Parse(txtAverageScore.Text),
                     MajorID = 0,
-                    Avatar = pictureBox.ImageLocation
+                    Avatar = relativeImagePath // Lưu đường dẫn tương đối vào cơ sở dữ liệu
                 };
                 MessageBox.Show("Thêm thông tin thành công!", "Thông Báo", MessageBoxButtons.OK);
                 Form1_Load(sender, e);
             }
             else
             {
-                // Cập nhật thông tin sinh viên
+                // Cập nhật 
                 s.FullName = txtName.Text;
                 int newFacultyID = int.Parse(cmbFaculty.SelectedValue.ToString());
                 if (s.FacultyID != newFacultyID)
                 {
                     s.FacultyID = newFacultyID;
-                    s.MajorID = 0; // Đặt chuyên ngành về null nếu thay đổi khoa
+                    s.MajorID = 0;
                 }
                 s.AverageScore = float.Parse(txtAverageScore.Text);
-                s.Avatar = pictureBox.ImageLocation;
+                s.Avatar = relativeImagePath; 
                 MessageBox.Show("Cập nhật thông tin thành công!", "Thông Báo", MessageBoxButtons.OK);
                 Form1_Load(sender, e);
             }
